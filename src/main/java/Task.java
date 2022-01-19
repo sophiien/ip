@@ -1,6 +1,6 @@
 public class Task {
-    private boolean done = false;
-    private String name;
+    protected boolean done = false;
+    protected String name;
 
     Task(String name) {
         this.name = name;
@@ -13,6 +13,7 @@ public class Task {
     public void unmark() {
         this.done = false;
     }
+
 
     public String toString() {
         if (done) {
