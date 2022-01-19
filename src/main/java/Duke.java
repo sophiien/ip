@@ -30,6 +30,11 @@ public class Duke {
             } else {
                 String name = "";
                 if (input[0].toLowerCase().equals("todo")) {
+                    if (input.length == 1) {
+                        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                        input = s.nextLine().split(" ");
+                        continue;
+                    }
                     for (int i = 1; i < input.length; i++) {
                         name += " " + input[i];
                     }
@@ -39,12 +44,17 @@ public class Duke {
                     System.out.println("Now you have " + j + " in the list");
                     input = s.nextLine().split(" ");
                     continue;
-                } else {
+                } else if (input[0].toLowerCase().equals("deadline") || input[0].toLowerCase().equals("event")) {
                     String deadline = "";
                     if (input[0].toLowerCase().equals("deadline")) {
+                        if (input.length == 1) {
+                            System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                            input = s.nextLine().split(" ");
+                            continue;
+                        }
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/by")) {
-                                for (int k = i+1; k < input.length; k++) {
+                                for (int k = i + 1; k < input.length; k++) {
                                     deadline += " " + input[k];
                                 }
                                 break;
@@ -53,11 +63,15 @@ public class Duke {
                         }
                         list[j] = new Deadline(name, deadline);
 
-
                     } else if (input[0].toLowerCase().equals("event")) {
+                        if (input.length == 1) {
+                            System.out.println("OOPS!!! The event of an event cannot be empty.");
+                            input = s.nextLine().split(" ");
+                            continue;
+                        }
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/at")) {
-                                for (int k = i+1; k < input.length; k++) {
+                                for (int k = i + 1; k < input.length; k++) {
                                     deadline += " " + input[k];
                                 }
                                 break;
@@ -71,12 +85,14 @@ public class Duke {
                     System.out.println("Now you have " + j + " in the list");
                     input = s.nextLine().split(" ");
                     continue;
-                }
-
-
+                } else {
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    input = s.nextLine().split(" ");
+                    continue;
                 }
             }
-            System.out.println("Bye. Hope to see you again soon!");
         }
+        System.out.println("Bye. Hope to see you again soon!");
     }
+}
 
