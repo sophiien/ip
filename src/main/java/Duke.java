@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.*;
 
 public class Duke {
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         Scanner s = new Scanner(System.in);
@@ -9,20 +10,21 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
         String[] input = s.nextLine().split(" ");
         while (!(input[0].toLowerCase().equals("bye"))) {
-            if (input[0].toLowerCase().equals("list")) {
+            String command = input[0].toLowerCase();
+            if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (int i = 1; i <= list.size() && list.get(i - 1) != null; i++) {
                     System.out.println(i + ". " + list.get(i - 1));
                 }
                 input = s.nextLine().split(" ");
                 continue;
-            } else if (input[0].toLowerCase().equals("mark")) {
+            } else if (command.equals("mark")) {
                 int i = Integer.parseInt(input[1]);
                 list.get(i-1).mark();
                 System.out.println("Nice! I've marked this task as done:\n" + list.get(i - 1));
                 input = s.nextLine().split(" ");
                 continue;
-            } else if (input[0].toLowerCase().equals("unmark")) {
+            } else if (command.equals("unmark")) {
                 int i = Integer.parseInt(input[1]);
                 list.get(i - 1).unmark();
                 System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i-1));
@@ -30,12 +32,12 @@ public class Duke {
                 continue;
             } else {
                 String name = "";
-                if (input[0].toLowerCase().equals("todo")) {
-                    if (input.length == 1) {
-                        System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                        input = s.nextLine().split(" ");
-                        continue;
-                    }
+                if (input.length == 1) {
+                    System.out.println("OOPS!!! The description of a "  + input[0] + " cannot be empty.");
+                    input = s.nextLine().split(" ");
+                    continue;
+                }
+                if (command.equals("todo")) {
                     for (int i = 1; i < input.length; i++) {
                         name += " " + input[i];
                     }
@@ -45,14 +47,9 @@ public class Duke {
                     System.out.println("Now you have " + j + " items in the list");
                     input = s.nextLine().split(" ");
                     continue;
-                } else if (input[0].toLowerCase().equals("deadline") || input[0].toLowerCase().equals("event")) {
+                } else if (command.equals("deadline") || command.equals("event")) {
                     String deadline = "";
-                    if (input[0].toLowerCase().equals("deadline")) {
-                        if (input.length == 1) {
-                            System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                            input = s.nextLine().split(" ");
-                            continue;
-                        }
+                    if (command.equals("deadline")) {
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/by")) {
                                 for (int k = i + 1; k < input.length; k++) {
@@ -64,12 +61,7 @@ public class Duke {
                         }
                         list.add(new Deadline(name, deadline));
 
-                    } else if (input[0].toLowerCase().equals("event")) {
-                        if (input.length == 1) {
-                            System.out.println("OOPS!!! The event of an event cannot be empty.");
-                            input = s.nextLine().split(" ");
-                            continue;
-                        }
+                    } else if (command.equals("event")) {
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/at")) {
                                 for (int k = i + 1; k < input.length; k++) {
@@ -86,7 +78,7 @@ public class Duke {
                     System.out.println("Now you have " + j + " item in the list");
                     input = s.nextLine().split(" ");
                     continue;
-                } else if (input[0].equals("delete")) {
+                } else if (command.equals("delete")) {
                     int i = Integer.parseInt(input[1]);
                     Task t = list.remove(i-1);
                     j--;
