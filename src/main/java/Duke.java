@@ -1,11 +1,21 @@
 import java.util.Scanner;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+
+    public static void writeToFile(String path, String text) throws IOException {
+        FileWriter fw = new FileWriter(path, true);
+        fw.write(text);
+        fw.write(System.getProperty("line.separator"));
+        fw.close();
+    }
 
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         Scanner s = new Scanner(System.in);
+        String path = "../../data/duke.txt";
         int j = 0;
         ArrayList<Task> list = new ArrayList<>();
         String[] input = s.nextLine().split(" ");
@@ -20,20 +30,20 @@ public class Duke {
                 continue;
             } else if (command.equals("mark")) {
                 int i = Integer.parseInt(input[1]);
-                list.get(i-1).mark();
+                list.get(i - 1).mark();
                 System.out.println("Nice! I've marked this task as done:\n" + list.get(i - 1));
                 input = s.nextLine().split(" ");
                 continue;
             } else if (command.equals("unmark")) {
                 int i = Integer.parseInt(input[1]);
                 list.get(i - 1).unmark();
-                System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i-1));
+                System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i - 1));
                 input = s.nextLine().split(" ");
                 continue;
             } else {
                 String name = "";
                 if (input.length == 1) {
-                    System.out.println("OOPS!!! The description of a "  + input[0] + " cannot be empty.");
+                    System.out.println("OOPS!!! The description of a " + input[0] + " cannot be empty.");
                     input = s.nextLine().split(" ");
                     continue;
                 }
@@ -41,7 +51,13 @@ public class Duke {
                     for (int i = 1; i < input.length; i++) {
                         name += " " + input[i];
                     }
-                    list.add(new Todo(name));
+                    Todo t1 = new Todo(name);
+                    list.add(t1);
+                    try {
+                        writeToFile(path, t1.toString());
+                    } catch (IOException e) {
+                        System.out.println("error: " + e.getMessage());
+                    }
                     System.out.println("Got it. I have added this task: " + list.get(j));
                     j += 1;
                     System.out.println("Now you have " + j + " items in the list");
@@ -59,7 +75,13 @@ public class Duke {
                             }
                             name += " " + input[i];
                         }
-                        list.add(new Deadline(name, deadline));
+                        Deadline d1 = new Deadline(name, deadline);
+                        list.add(d1);
+                        try {
+                            writeToFile(path, d1.toString());
+                        } catch (IOException e) {
+                            System.out.println("error: " + e.getMessage());
+                        }
 
                     } else if (command.equals("event")) {
                         for (int i = 1; i < input.length; i++) {
@@ -71,7 +93,13 @@ public class Duke {
                             }
                             name += " " + input[i];
                         }
-                        list.add(new Event(name, deadline));
+                        Event e1 = new Event(name, deadline);
+                        list.add(e1);
+                        try {
+                            writeToFile(path, e1.toString());
+                        } catch (IOException e) {
+                            System.out.println("error: " + e.getMessage());
+                        }
                     }
                     System.out.println("Got it. I have added this task: " + list.get(j));
                     j += 1;
@@ -80,7 +108,7 @@ public class Duke {
                     continue;
                 } else if (command.equals("delete")) {
                     int i = Integer.parseInt(input[1]);
-                    Task t = list.remove(i-1);
+                    Task t = list.remove(i - 1);
                     j--;
                     System.out.println("Noted. I've removed this task: \n" + t);
                     System.out.println("Now you have " + j + " item in the list");
@@ -96,4 +124,3 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-

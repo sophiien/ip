@@ -1,6 +1,7 @@
 public class Event extends Task {
 
     private String event;
+
     Event(String name, String event) {
         super(name);
         this.event = event;
