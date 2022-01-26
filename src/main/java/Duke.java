@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -10,6 +12,29 @@ public class Duke {
         fw.write(text);
         fw.write(System.getProperty("line.separator"));
         fw.close();
+
+    }
+
+    public static String dateFormat(String date) {
+        LocalDate d1 = LocalDate.parse(date);
+        return d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy "));
+    }
+
+    public static String timeFormat(String time) {
+        int i = Integer.parseInt(time);
+        if (i > 0000 && i < 1100) {
+            return i + "am";
+        } else if (i >= 1300 && i < 2359) {
+            char[] c = time.toCharArray();
+            String min = new StringBuilder().append(c[2]).append(c[3]).toString();
+            String hour = new StringBuilder().append(c[0]).append(c[1]).toString();
+
+            int h = Integer.parseInt(hour) - 12;
+            return String.valueOf(h) + min + "pm";
+        } else {
+            return i + "pm";
+        }
+
     }
 
     public static void main(String[] args) {
@@ -68,9 +93,12 @@ public class Duke {
                     if (command.equals("deadline")) {
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/by")) {
-                                for (int k = i + 1; k < input.length; k++) {
-                                    deadline += " " + input[k];
-                                }
+                                // for (int k = i + 1; k < input.length; k++) {
+                                // deadline += " " + input[k];
+                                // }
+                                String date = input[i + 1];
+                                String time = input[i + 2];
+                                deadline += dateFormat(date) + timeFormat(time);
                                 break;
                             }
                             name += " " + input[i];
@@ -86,9 +114,9 @@ public class Duke {
                     } else if (command.equals("event")) {
                         for (int i = 1; i < input.length; i++) {
                             if (input[i].equals("/at")) {
-                                for (int k = i + 1; k < input.length; k++) {
-                                    deadline += " " + input[k];
-                                }
+                                String date = input[i + 1];
+                                String time = input[i + 2];
+                                deadline += dateFormat(date) + timeFormat(time);
                                 break;
                             }
                             name += " " + input[i];
