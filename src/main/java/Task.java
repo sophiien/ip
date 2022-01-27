@@ -1,3 +1,5 @@
+package Duke;
+
 public class Task {
     protected boolean done = false;
     protected String name;
@@ -13,7 +15,6 @@ public class Task {
     public void unmark() {
         this.done = false;
     }
-
 
     public String toString() {
         if (done) {

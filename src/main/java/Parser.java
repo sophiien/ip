@@ -1,10 +1,8 @@
+package Duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
