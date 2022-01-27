@@ -159,7 +159,6 @@ public class Parser {
             } else if (command.equals("delete")) {
                 int i = Integer.parseInt(input[1]);
                 Task t = list.remove(i - 1);
-                int total = Duke.j + list.size();
                 Duke.j--;
                 System.out.println("Noted. I've removed this task: \n" + t);
                 System.out.println("Now you have " + list.size() + " item in the list");
