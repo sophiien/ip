@@ -10,6 +10,11 @@ public class Duke {
     private Ui ui;
     public static int j = 0;
 
+    /**
+     * Constructor for Duke class
+     * @param path
+     * @returns new Duke Object
+     */
     public Duke(String path) {
         ui = new Ui();
         storage = new Storage(path);
@@ -21,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs entire logic for chatbot
+     */
     public void run() {
         ui.welcomeMsg();
         Scanner s = new Scanner(System.in);

@@ -10,6 +10,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
+    /**
+     * Writes given text to file in given path
+     * @param path of file
+     * @param text to add
+     * @throws IOException
+     * @returns void
+     */
     public static void writeToFile(String path, String text) throws IOException {
         FileWriter fw = new FileWriter(path, true);
         fw.write(text);
@@ -18,11 +25,21 @@ public class Parser {
 
     }
 
+    /**
+     * Formats date to mmm-dd-yyyy
+     * @param date to format
+     * @return formatted date in mmm-dd-yyy
+     */
     public static String dateFormat(String date) {
         LocalDate d1 = LocalDate.parse(date);
         return d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy "));
     }
 
+    /**
+     * Formats time to 12h
+     * @param time to format
+     * @return formatted time in 12h
+     */
     public static String timeFormat(String time) {
         int i = Integer.parseInt(time);
         if (i > 0000 && i < 1100) {
@@ -40,6 +57,11 @@ public class Parser {
 
     }
 
+    /**
+     * Parses string to create new task object
+     * @param task to create
+     * @return new task from string
+     */
     public static Task parseStringToTask(String task) {
         String taskcopy = task;
         String[] input = task.split(" ");
@@ -79,6 +101,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses command inputted by user
+     * @param command from user
+     * @param list existing tasklist
+     * @param input full input from user
+     * @param path of file from storage
+     */
     public void commandToTask(String command, ArrayList<Task> list, String[] input, String path) {
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list: ");
