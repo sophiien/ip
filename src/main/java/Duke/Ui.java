@@ -1,7 +1,5 @@
 package Duke;
 
-import java.util.*;
-
 public class Ui {
 
     /**
