@@ -1,31 +1,18 @@
-package Duke;
+package duke1;
 
 import java.util.*;
 
 public class Tasklist {
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    /**
-     * Constructor for empty tasklist
-     */
     Tasklist() {
 
     }
 
-    /**
-     * Adds inputted tasks to the existing tasklist
-     * @param tasks to add
-     */
     Tasklist(ArrayList<Task> tasks) {
         this.tasks.addAll(tasks);
     }
 
-    /**
-     * Add task to the list
-     * @param command on how to manipulate list
-     * @param name of task
-     * @param date of task
-     */
     public void addTask(String command, String name, String date) {
         if (command.equals("event")) {
             this.tasks.add(new Event(name, date));
@@ -36,26 +23,10 @@ public class Tasklist {
         }
     }
 
-    /**
-     * Overloaded method to add task
-     * @param task to add
-     */
-    public void addTask(Task t) {
-        this.tasks.add(t);
-    }
-
-    /**
-     * Get lists of task
-     * @return arraylist of tasks
-     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
-    /**
-     * tostring method for tasklist
-     * @return string of tasklist
-     */
     @Override
     public String toString() {
         System.out.println("Here are the tasks in your list: ");
