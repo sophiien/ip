@@ -1,10 +1,12 @@
 package Duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 // TODO FIX THE FORMATTING OF THE LIST BUT I THINK OTHER THAN THAT EVERYTHINGS FINE
 
@@ -189,6 +191,17 @@ public class Parser {
                 Duke.j--;
                 System.out.println("Noted. I've removed this task: \n" + t);
                 System.out.println("Now you have " + list.size() + " item in the list");
+            } else if (command.equals("find")) {
+                String find = input[1];
+                Tasklist tasks = new Tasklist();
+                for (Task t: list) {
+                    String[] s = t.toString().split(" ");
+                    ArrayList<String> ls = new ArrayList<>(Arrays.asList(s));
+                    if (ls.contains(find)) {
+                        tasks.addTask(t);
+                    }
+                }
+                System.out.println(tasks);
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

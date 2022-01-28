@@ -37,6 +37,14 @@ public class Tasklist {
     }
 
     /**
+     * Overloaded method to add task
+     * @param task to add
+     */
+    public void addTask(Task t) {
+        this.tasks.add(t);
+    }
+
+    /**
      * Get lists of task
      * @return arraylist of tasks
      */
