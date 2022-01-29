@@ -1,4 +1,4 @@
-package duke1;
+// package duke1;
 
 public class Deadline extends Task {
     private String date;
@@ -22,8 +22,8 @@ public class Deadline extends Task {
      */
     public String toString() {
         if (done) {
-            return "[D][X]" + this.name + " (by: " + this.date + ")";
+            return "[D][X] " + this.name + " (by: " + this.date + ")";
         }
-        return "[D][]" + this.name + " (by: " + this.date + ")";
+        return "[D][] " + this.name + " (by: " + this.date + ")";
     }
 }

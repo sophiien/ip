@@ -1,4 +1,4 @@
-package duke1;
+// package duke1;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -72,14 +72,19 @@ public class Parser {
         String taskcopy = task;
         String[] input = task.split(" ");
         String[] inputcopy = taskcopy.split("\\[");
+
         if (inputcopy[1].equals("E]")) {
             String name = "";
             String date = "";
             for (int i = 1; i < input.length; i++) {
-                if (input[i] != "(at:") {
-                    name += input[i];
+                if (!input[i].equals("(at:")) {
+                    if (input[i + 1].equals("(at:")) {
+                        name += input[i];
+                        continue;
+                    }
+                    name += input[i] + " ";
                 } else {
-                    date += input[i + 1] + "-" + input[i + 2] + "-" + input[i + 3];
+                    date += input[i + 1] + "-" + input[i + 2] + "-" + input[i + 3] + " " + input[i + 4];
                     break;
                 }
             }
@@ -90,9 +95,13 @@ public class Parser {
             String date = "";
             for (int i = 1; i < input.length; i++) {
                 if (!input[i].equals("(by:")) {
-                    name += input[i];
+                    if (input[i + 1].equals("(by:")) {
+                        name += input[i];
+                        continue;
+                    }
+                    name += input[i] + " ";
                 } else {
-                    date += input[i + 1] + "-" + input[i + 2] + "-" + input[i + 3];
+                    date += input[i + 1] + "-" + input[i + 2] + "-" + input[i + 3] + " " + input[i + 4];
                     break;
                 }
             }
@@ -101,7 +110,7 @@ public class Parser {
         } else {
             String name = "";
             for (int i = 1; i < input.length; i++) {
-                name += input[i];
+                name += input[i] + " ";
             }
             return new Todo(name);
         }
@@ -136,7 +145,7 @@ public class Parser {
             }
             if (command.equals("todo")) {
                 for (int i = 1; i < input.length; i++) {
-                    name += " " + input[i];
+                    name += input[i] + " ";
                 }
                 Todo t1 = new Todo(name);
                 list.add(t1);
@@ -153,13 +162,13 @@ public class Parser {
                 String deadline = "";
                 if (command.equals("deadline")) {
                     for (int i = 1; i < input.length; i++) {
-                        if (input[i].equals("/by:")) {
+                        if (input[i].equals("/by: ")) {
                             String date = input[i + 1];
                             String time = input[i + 2];
                             deadline += dateFormat(date) + timeFormat(time);
                             break;
                         }
-                        name += " " + input[i];
+                        name += input[i] + " ";
                     }
                     Deadline d1 = new Deadline(name, deadline);
                     list.add(d1);
@@ -171,13 +180,13 @@ public class Parser {
 
                 } else if (command.equals("event")) {
                     for (int i = 1; i < input.length; i++) {
-                        if (input[i].equals("/at:")) {
+                        if (input[i].equals("/at: ")) {
                             String date = input[i + 1];
                             String time = input[i + 2];
                             deadline += dateFormat(date) + timeFormat(time);
                             break;
                         }
-                        name += " " + input[i];
+                        name += input[i] + " ";
                     }
                     Event e1 = new Event(name, deadline);
                     list.add(e1);

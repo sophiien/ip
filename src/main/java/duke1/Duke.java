@@ -1,4 +1,4 @@
-package duke1;
+// package duke1;
 
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -30,12 +30,11 @@ public class Duke {
             Parser p = new Parser();
             p.commandToTask(command, this.tasks.getTasks(), input, this.storage.getPath());
             input = s.nextLine().split(" ");
-            continue;
         }
         ui.endMsg();
     }
 
     public static void main(String[] args) {
-        new Duke("../../data/duke.txt").run();
+        new Duke("../../../data/duke.txt").run();
     }
 }
