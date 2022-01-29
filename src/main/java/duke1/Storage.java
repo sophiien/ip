@@ -10,10 +10,21 @@ import java.util.ArrayList;
 public class Storage {
     private String path;
 
+    /**
+     * Constructor for storage
+     * 
+     * @param path of storage file
+     */
     Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Write text to file in path
+     * 
+     * @param text
+     * @throws IOException
+     */
     public void writeToFile(String text) throws IOException {
         FileWriter fw = new FileWriter(this.path, true);
         fw.write(text);
@@ -22,6 +33,12 @@ public class Storage {
 
     }
 
+    /**
+     * Loads data from storage to current tasklist
+     * 
+     * @return ArrayList of the tasks in the storage db
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(this.path); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -34,6 +51,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Get path of storage
+     * 
+     * @return string ot the storage path
+     */
     public String getPath() {
         return this.path;
     }

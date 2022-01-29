@@ -23,6 +23,10 @@ public class Tasklist {
         }
     }
 
+    public void addTaskObject(Task t) {
+        this.tasks.add(t);
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
