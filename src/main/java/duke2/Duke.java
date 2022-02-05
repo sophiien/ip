@@ -11,6 +11,12 @@ public class Duke  {
     private Ui ui;
     public static int j = 0;
 
+    /**
+     * Constructor for Duke
+     *
+     * @param path
+     * @returns new Duke object
+     */
     public Duke(String path) {
         ui = new Ui();
         storage = new Storage(path);
@@ -22,9 +28,18 @@ public class Duke  {
         }
     }
 
+    /**
+     * Constructor for Duke
+     *
+     * @returns new Deadline object
+     */
     public Duke() {
 
     }
+
+    /**
+     * To run Duke UI
+     */
     public void run() {
         ui.welcomeMsg();
         Scanner s = new Scanner(System.in);
@@ -38,6 +53,12 @@ public class Duke  {
         ui.endMsg();
     }
 
+    /**
+     * Get response from other duke
+     *
+     * @param input for response
+     * @returns response to be echoed
+     */
     public String getResponse(String input) {
         return "Repeat: " + input;
     }
