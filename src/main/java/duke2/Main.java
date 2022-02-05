@@ -18,8 +18,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+        stage.setMinHeight(600.0);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
