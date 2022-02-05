@@ -64,6 +64,6 @@ public class Duke  {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/Sony/Downloads/ip1/src/data/duke.txt").run();
+        new Duke("src/data/duke.txt").run();
     }
 }
