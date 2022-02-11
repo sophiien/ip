@@ -139,6 +139,7 @@ public class Parser {
             list.get(i - 1).unmark();
             System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i - 1));
         } else {
+            assert input.length > 1: "Description cannot be empty";
             String name = "";
             if (input.length == 1) {
                 System.out.println("OOPS!!! The description of a " + input[0] + " cannot be empty.");
