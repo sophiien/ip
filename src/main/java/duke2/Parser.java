@@ -138,6 +138,10 @@ public class Parser {
             int i = Integer.parseInt(input[1]);
             list.get(i - 1).unmark();
             System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i - 1));
+        } else if (command.equals("undo")) {
+            int lastIdx = list.size() -1;
+            list.remove(lastIdx);
+            System.out.println("I have undone the previous command");
         } else {
             assert input.length > 1: "Description cannot be empty";
             String name = "";
