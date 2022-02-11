@@ -1,29 +1,26 @@
-# User Guide
+# Duke
 
-## Features 
+- text-based
+- easy to learn 
+- ~~FAST~~ SUPER FAST to use
 
-### Feature-ABC
 
-Description of the feature.
+All you need to do is,
 
-### Feature-XYZ
+1. download it from here.
+2. double-click it.
+3. add your tasks.
+3. let it manage your tasks for you 😉
 
-Description of the feature.
+features 
+- [x] managing tasks
+- [ ] sorting tasks
 
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
+Some basic Git commands are:
 ```
-expected output
+git status
+git add
+git commit
 ```
+
+> "Your mind is for having ideas, not holding them" - David Allen [source](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).
