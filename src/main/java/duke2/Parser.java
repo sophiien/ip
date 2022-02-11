@@ -17,7 +17,7 @@ public class Parser {
      * @param path of file
      * @param text to add
      * @throws IOException
-     * @returns void
+     * @return void
      */
     public static void writeToFile(String path, String text) throws IOException {
         FileWriter fw = new FileWriter(path, true);
@@ -155,9 +155,9 @@ public class Parser {
                 } catch (IOException e) {
                     System.out.println("error: " + e.getMessage());
                 }
-                int total = Duke.j + list.size();
+                int total = Duke.totalCount + list.size();
                 System.out.println("Got it. I have added this task: " + list.get(total - 1));
-                Duke.j += 1;
+                Duke.totalCount += 1;
                 System.out.println("Now you have " + total + " items in the list");
             } else if (command.equals("deadline") || command.equals("event")) {
                 String deadline = "";
@@ -201,12 +201,12 @@ public class Parser {
                     }
                 }
                 System.out.println("Got it. I have added this task: " + list.get(list.size() - 1));
-                Duke.j += 1;
+                Duke.totalCount += 1;
                 System.out.println("Now you have " + list.size() + " item in the list");
             } else if (command.equals("delete")) {
                 int i = Integer.parseInt(input[1]);
                 Task t = list.remove(i - 1);
-                Duke.j--;
+                Duke.totalCount--;
                 System.out.println("Noted. I've removed this task: \n" + t);
                 System.out.println("Now you have " + list.size() + " item in the list");
             } else if (command.equals("find")) {

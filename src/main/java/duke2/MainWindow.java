@@ -36,10 +36,7 @@ public class MainWindow {
             duke = d;
         }
 
-        /**
-         * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-         * the dialog container. Clears the user input after processing.
-         */
+
         @FXML
         private void handleUserInput() {
             String input = userInput.getText();
@@ -50,37 +47,5 @@ public class MainWindow {
             );
             userInput.clear();
         }
-
-//        scrollPane.setContent(dialogContainer);
-//        scrollPane.setPrefSize(385, 535);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//        scrollPane.setVvalue(1.0);
-//        scrollPane.setFitToWidth(true);
-//
-//    //ensures that vbox reacts to own size changing and scrolling
-//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
-    // event handlers
-
-
-//
-//    HBox hb = new HBox();
-//        HBox.setHgrow(userInput, Priority.ALWAYS);
-//        hb.getChildren().addAll(userInput, sendButton);
-//
-//    AnchorPane mainLayout = new AnchorPane();
-//        mainLayout.setPrefSize(400.0, 600.0);
-//
-//        AnchorPane.setTopAnchor(scrollPane, 10.0);
-//        AnchorPane.setBottomAnchor(scrollPane, 50.0);
-//        AnchorPane.setRightAnchor(scrollPane, 10.0);
-//        AnchorPane.setLeftAnchor(scrollPane, 10.0);
-//        AnchorPane.setLeftAnchor(hb, 10.0);
-//        AnchorPane.setRightAnchor(hb, 10.0);
-//        AnchorPane.setBottomAnchor(hb, 10.0);
-//
-//        mainLayout.getChildren().addAll(scrollPane, hb);
     }
 

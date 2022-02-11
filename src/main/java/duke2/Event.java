@@ -16,7 +16,7 @@ public class Event extends Task {
     }
 
     /**
-     * Event toString()
+     * Returns formatted string of Event object
      * 
      * @return Formatted string for event object
      */

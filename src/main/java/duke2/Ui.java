@@ -5,14 +5,14 @@ public class Ui {
     /**
      * Prints welcome msg of chatbot
      */
-    public void welcomeMsg() {
+    public void printWelcomeMsg() {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
     }
 
     /**
      * Prints ending msg of chatbot
      */
-    public void endMsg() {
+    public void printEndMsg() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }

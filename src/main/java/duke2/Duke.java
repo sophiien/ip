@@ -9,7 +9,7 @@ public class Duke  {
     private Storage storage;
     private Tasklist tasks;
     private Ui ui;
-    public static int j = 0;
+    public static int totalCount = 0;
 
     /**
      * Constructor for Duke
@@ -31,7 +31,7 @@ public class Duke  {
     /**
      * Constructor for Duke
      *
-     * @returns new Deadline object
+     * @returns new Duke object
      */
     public Duke() {
 
@@ -41,7 +41,7 @@ public class Duke  {
      * To run Duke UI
      */
     public void run() {
-        ui.welcomeMsg();
+        ui.printWelcomeMsg();
         Scanner s = new Scanner(System.in);
         String[] input = s.nextLine().split(" ");
         while (!(input[0].toLowerCase().equals("bye"))) {
@@ -50,7 +50,7 @@ public class Duke  {
             p.commandToTask(command, this.tasks.getTasks(), input, this.storage.getPath());
             input = s.nextLine().split(" ");
         }
-        ui.endMsg();
+        ui.printEndMsg();
     }
 
     /**
