@@ -34,7 +34,7 @@ public class Tasklist {
     @Override
     public String toString() {
         System.out.println("Here are the tasks in your list: ");
-        for (int i = 1; i <= tasks.size() && tasks.get(i) != null; i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i - 1));
         }
         return "";

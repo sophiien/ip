@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-// TODO FIX THE FORMATTING OF THE LIST BUT I THINK OTHER THAN THAT EVERYTHINGS FINE
 
 public class Parser {
 
@@ -125,6 +124,7 @@ public class Parser {
      * @param path    of file from storage
      */
     public void commandToTask(String command, ArrayList<Task> list, String[] input, String path) {
+
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list: ");
             for (int i = 1; i <= list.size() && list.get(i - 1) != null; i++) {
@@ -139,6 +139,7 @@ public class Parser {
             list.get(i - 1).unmark();
             System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i - 1));
         } else {
+            assert input.length > 1: "Description cannot be empty";
             String name = "";
             if (input.length == 1) {
                 System.out.println("OOPS!!! The description of a " + input[0] + " cannot be empty.");
@@ -160,9 +161,10 @@ public class Parser {
                 System.out.println("Now you have " + total + " items in the list");
             } else if (command.equals("deadline") || command.equals("event")) {
                 String deadline = "";
+                System.out.println(Arrays.toString(input));
                 if (command.equals("deadline")) {
                     for (int i = 1; i < input.length; i++) {
-                        if (input[i].equals("/by: ")) {
+                        if (input[i].equals("/by:")) {
                             String date = input[i + 1];
                             String time = input[i + 2];
                             deadline += dateFormat(date) + timeFormat(time);
@@ -180,9 +182,11 @@ public class Parser {
 
                 } else if (command.equals("event")) {
                     for (int i = 1; i < input.length; i++) {
-                        if (input[i].equals("/at: ")) {
+                        if (input[i].equals("/at:")) {
                             String date = input[i + 1];
                             String time = input[i + 2];
+                            System.out.println(date);
+                            System.out.println(time);
                             deadline += dateFormat(date) + timeFormat(time);
                             break;
                         }

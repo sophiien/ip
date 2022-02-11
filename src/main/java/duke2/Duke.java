@@ -2,7 +2,7 @@ package duke2;// package duke1;
 
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 
 public class Duke  {
 
