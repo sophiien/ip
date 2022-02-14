@@ -5,6 +5,12 @@ public class Todo extends Task {
         super(name);
     }
 
+    public void createTodoFromCommand(String[] input) {
+        for (int i = 1; i < input.length; i++) {
+            this.name += input[i] + " ";
+        }
+    }
+
     /**
      * toString() method for todo
      * 
