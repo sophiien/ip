@@ -1,5 +1,10 @@
 package duke2;// package duke1;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 //import javafx.scene.control.Label;
@@ -63,7 +68,22 @@ public class Duke  {
         return "Repeat: " + input;
     }
 
-    public static void main(String[] args) {
-        new Duke("src/data/duke.txt").run();
+    public static void main(String[] args) throws IOException {
+        String currDir = System.getProperty("user.dir");
+        String filePath = "src/data/duke.txt";
+        File f = new File(currDir+"/duke.txt");
+        System.out.println(f.createNewFile());
+//        new Duke("src/data/duke.txt").run();
+        if (f.createNewFile()) {
+            Path dp = Paths.get("/src/data/");
+            Files.createDirectories(dp);
+            System.out.println(dp);
+            Path p = Paths.get(currDir+"/src/data/duke.txt");
+            System.out.println(p);
+            Files.createFile(p);
+            new Duke(currDir+"/src/data/duke.txt").run();
+        } else {
+            new Duke(filePath).run();
+        }
     }
 }
