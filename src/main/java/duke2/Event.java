@@ -1,11 +1,13 @@
 package duke2;// package duke1;
 
+import java.util.Arrays;
+
 import static duke2.Parser.dateFormat;
 import static duke2.Parser.timeFormat;
 
 public class Event extends Task {
 
-    private String event;
+    protected String event;
 
     /**
      * Constructor for Event object
@@ -34,13 +36,17 @@ public class Event extends Task {
     }
 
     public void createEventFromCommand(String[] input) {
+        if (!Arrays.asList(input).contains("/at:")) {
+            this.event = null;
+            return;
+        }
         for (int i = 1; i < input.length; i++) {
             if (input[i].equals("/at:")) {
                 String date = input[i + 1];
                 String time = input[i + 2];
                 System.out.println(date);
                 System.out.println(time);
-                this.event += dateFormat(date) + timeFormat(time);
+                this.event += dateFormat(date + " " + time);
                 break;
             }
             this.name += input[i] + " ";

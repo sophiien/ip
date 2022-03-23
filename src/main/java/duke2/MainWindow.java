@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,9 +29,16 @@ public class MainWindow {
         private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
         private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+        /**
+        * Intitalise main window
+        */
         @FXML
         public void initialize() {
+            String greeting = Ui.printWelcomeMsg();
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(greeting, dukeImage));
             scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         }
 
         public void setDuke(Duke d) {
@@ -37,13 +47,16 @@ public class MainWindow {
 
 
         @FXML
-        private void handleUserInput() {
+        private void handleUserInput() throws IOException {
             String input = userInput.getText();
+            System.out.println(input);
             String response = duke.getResponse(input);
+            System.out.println(response);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+            dialogContainer.setSpacing(15);
             userInput.clear();
         }
     }

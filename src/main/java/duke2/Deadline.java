@@ -1,10 +1,12 @@
 package duke2;// package duke1;
 
+import java.util.Arrays;
+
 import static duke2.Parser.dateFormat;
 import static duke2.Parser.timeFormat;
 
 public class Deadline extends Task {
-    private String date;
+    protected String date;
 
     /**
      * Constructor for Deadline
@@ -21,25 +23,37 @@ public class Deadline extends Task {
     public void createDeadlineFromString(String[] input) {
         for (int i = 1; i < input.length; i++) {
             if (!input[i].equals("(by:")) {
+                System.out.println(input[i]);
                 if (input[i + 1].equals("(by:")) {
                     this.name += input[i];
                     continue;
                 }
                 this.name += input[i] + " ";
             } else {
+                try {
                 this.date += input[i + 1] + "-" + input[i + 2] + "-" + input[i + 3] + " " + input[i + 4];
                 break;
+            } catch (IndexOutOfBoundsException e) {
+                    this.date = null;
+                }
             }
         }
     }
 
 
+
     public void createDeadlineFromCommand(String[] input) {
+
+        if (!Arrays.asList(input).contains("/by:")) {
+            System.out.println("here");
+            this.date = null;
+            return;
+        }
         for (int i = 1; i < input.length; i++) {
             if (input[i].equals("/by:")) {
                 String date = input[i + 1];
                 String time = input[i + 2];
-                this.date += dateFormat(date) + timeFormat(time);
+                this.date = dateFormat(date + " " + time);
                 break;
             }
             this.name += input[i] + " ";

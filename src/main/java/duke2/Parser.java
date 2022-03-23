@@ -1,10 +1,9 @@
 package duke2;// package duke1;
 
-import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
@@ -28,14 +27,16 @@ public class Parser {
     }
 
     /**
-     * Formats date to mmm-dd-yyyy
-     * 
+     * Formats date to mmm dd yyyy
+     *
      * @param date to format
      * @return formatted date in mmm-dd-yyy
      */
     public static String dateFormat(String date) {
-        LocalDate d1 = LocalDate.parse(date);
-        return d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy "));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime d1 = LocalDateTime.parse(date, formatter);
+        DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MMM dd YYYY HHmm");
+        return d1.format(newFormatter);
     }
 
     /**
@@ -61,17 +62,17 @@ public class Parser {
 
     }
 
-    public void parseFindCommand(String[] input, ArrayList<Task> list) {
+    public ArrayList<Task> parseFindCommand(String[] input, ArrayList<Task> list) {
         String find = input[1];
-        Tasklist tasks = new Tasklist();
+        ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : list) {
             String[] s = t.toString().split(" ");
             ArrayList<String> ls = new ArrayList<>(Arrays.asList(s));
             if (ls.contains(find)) {
-                tasks.addTaskObject(t);
+                tasks.add(t);
             }
         }
-        System.out.println(tasks);
+        return tasks;
     }
 
 
@@ -93,6 +94,7 @@ public class Parser {
 
         } else if (inputcopy[1].equals("D]")) {
             Deadline d = new Deadline("", "");
+            System.out.println(Arrays.asList(input).toString());
             d.createDeadlineFromString(input);
             return d;
 
@@ -113,24 +115,24 @@ public class Parser {
      * @param input   full input from user
      * @param path    of file from storage
      */
-    public void commandToTask(String command, ArrayList<Task> list, String[] input, String path) {
+    public String commandToTask(String command, ArrayList<Task> list, String[] input, String path) {
 
         if (command.equals("list")) {
-            Ui.printList(list);
+            return Ui.printList(list);
         } else if (command.equals("mark")) {
             int i = Integer.parseInt(input[1]);
-            list.get(i - 1).mark();
+            return list.get(i - 1).mark();
         } else if (command.equals("unmark")) {
             int i = Integer.parseInt(input[1]);
-            list.get(i - 1).unmark();
+            return list.get(i - 1).unmark();
         } else if (command.equals("undo")) {
             int lastIdx = list.size() -1;
             list.remove(lastIdx);
-            Ui.printUndo();
+            return Ui.printUndo();
         } else {
             assert input.length > 1 : "Description cannot be empty";
             if (input.length == 1) {
-                Ui.printEmptyError(input);
+                return Ui.printEmptyError(input);
             }
             if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 if (command.equals("todo")) {
@@ -141,24 +143,36 @@ public class Parser {
                 } else if (command.equals("deadline")) {
                     Deadline d1 = new Deadline("", "");
                     d1.createDeadlineFromCommand(input);
+                    if (d1.date == null) {
+                        return "Deadline format must be: deadline (task) /by: DD-MM-YYYY HHmm";
+                    }
                     list.add(d1);
                     Error.error(path, d1);
                 } else if (command.equals("event")) {
                     Event e1 = new Event("", "");
                     e1.createEventFromCommand(input);
+                    if (e1.event == null) {
+                        return "Event format must be: event (task) /at: DD-MM-YYYY HHmm";
+                    }
                     list.add(e1);
                     Error.error(path, e1);
                 }
-                Ui.printAddedTask(list);
+                return Ui.printAddedTask(list);
             } else if (command.equals("delete")) {
                 int i = Integer.parseInt(input[1]);
                 Task t = list.remove(i - 1);
-                Ui.printDeletedTask(list, t);
+                return Ui.printDeletedTask(list, t);
 
             } else if (command.equals("find")) {
-                parseFindCommand(input, list);
+                return Ui.printList(parseFindCommand(input, list));
+            } else if (command.equals("update")) {
+                int i = Integer.parseInt(input[1]);
+                String s = input[2];
+                String old = list.get(i-1).name;
+                list.get(i-1).changeDescription(s);
+                return Ui.printUpdate(old, s);
             } else {
-                Ui.printIdk();
+                return Ui.printIdk();
             }
         }
     }

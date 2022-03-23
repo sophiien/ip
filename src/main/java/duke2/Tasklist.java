@@ -31,6 +31,8 @@ public class Tasklist {
         return this.tasks;
     }
 
+    public boolean isEmpty() { return this.tasks.isEmpty();}
+
     @Override
     public String toString() {
         System.out.println("Here are the tasks in your list: ");

@@ -4,20 +4,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
-    private String path;
+    private static String path;
 
-    /**
-     * Constructor for storage
-     * 
-     * @param path of storage file
-     */
-    Storage(String path) {
-        this.path = path;
-    }
+//    /**
+//     * Constructor for storage
+//     *
+//     * @param path of storage file
+//     */
+//    Storage(String path) {
+//        this.path = path;
+//    }
 
     /**
      * Write text to file in path
@@ -39,8 +42,8 @@ public class Storage {
      * @return ArrayList of the tasks in the storage db
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
-        File f = new File(this.path); // create a File for the given file path
+    public static void load() throws FileNotFoundException {
+        File f = new File(getPath()); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
@@ -48,7 +51,22 @@ public class Storage {
             Task t = p.parseStringToTask(s.nextLine());
             tasks.add(t);
         }
-        return tasks;
+        Duke.tasks = new Tasklist(tasks);
+//        return tasks;
+    }
+
+    /**
+     * Restores the contents of file from local directory
+     *
+     * @throws IOException If path is not valid
+     */
+    public static void createFiles() throws IOException {
+        String newFilePath = getPath();
+        try {
+            Files.createFile(Paths.get(newFilePath));
+        } catch (FileAlreadyExistsException e) {
+            load();
+        }
     }
 
     /**
@@ -56,7 +74,11 @@ public class Storage {
      * 
      * @return string ot the storage path
      */
-    public String getPath() {
-        return this.path;
+    public static String getPath() {
+        String parent = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
+        Storage.path = parent + "/duke.txt";
+        System.out.println(path);
+        return parent + "/duke.txt";
     }
+
 }

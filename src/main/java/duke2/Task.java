@@ -8,16 +8,20 @@ public class Task {
         this.name = name;
     }
 
-    public void mark() {
+    public String mark() {
         this.done = true;
-        System.out.println("Nice! I've marked this task as done:\n" + this.name);
+        return "Nice! I've marked this task as done:\n" + this.name + "\n";
 
     }
 
-    public void unmark() {
+    public String unmark() {
         this.done = false;
-        System.out.println("OK, I've marked this task as not done yet:\n" + this.name);
+        return "OK, I've marked this task as not done yet:\n" + this.name + "\n";
 
+    }
+
+    public void changeDescription(String str) {
+        this.name = str;
     }
 
     public String toString() {

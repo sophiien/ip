@@ -1,9 +1,12 @@
 package duke2;
+
 import java.io.IOException;
 
+import duke2.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -13,18 +16,19 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
-    
+
+    /**
+     * Sets the GUI when chatbot initialises
+     * @param stage skeleton to be created from
+     */
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinWidth(400.0);
-        stage.setMinHeight(600.0);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

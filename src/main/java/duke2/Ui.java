@@ -1,51 +1,67 @@
 package duke2;// package duke1;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
+
 
     /**
      * Prints welcome msg of chatbot
      */
-    public void printWelcomeMsg() {
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+    public static String printWelcomeMsg() {
+        return "Hello! I'm Duke \nWhat can I do for you?";
     }
 
     /**
      * Prints ending msg of chatbot
      */
-    public void printEndMsg() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String printEndMsg() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public static void printAddedTask(ArrayList<Task> list) {
-        System.out.println("Got it. I have added this task: " + list.get(list.size() - 1));
+    public static String printAddedTask(ArrayList<Task> list) {
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I have added this task: " + list.get(list.size() - 1) + "\n");
         Duke.totalCount += 1;
-        System.out.println("Now you have " + list.size() + " item in the list");
+        str.append("Now you have " + list.size() + " item in the list\n");
+        return str.toString();
     }
 
-    public static void printDeletedTask(ArrayList<Task> list, Task t) {
+    public static String printUpdate(String original, String word) {
+        return "I have updated " + original + " to " + word + "\n";
+    }
+
+
+
+    public static String printDeletedTask(ArrayList<Task> list, Task t) {
         Duke.totalCount--;
-        System.out.println("Noted. I've removed this task: \n" + t);
-        System.out.println("Now you have " + list.size() + " item in the list");
+        StringBuilder str = new StringBuilder();
+        str.append("Noted. I've removed this task: \n" + t + "\n");
+        str.append("Now you have " + list.size() + " item in the list \n");
+        return str.toString();
     }
 
-    public static void printIdk() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public static String printIdk() {
+        return "OOPS!!! I'm sorry, but I don't know what that means :-( \n";
     }
 
-    public static void printEmptyError(String[] input) {
-        System.out.println("OOPS!!! The description of a " + input[0] + " cannot be empty.");
+    public static String printEmptyError(String[] input) {
+        return "OOPS!!! The description of a " + input[0] + " cannot be empty. \n";
     }
 
-    public static void printList(ArrayList<Task> list) {
-        System.out.println("Here are the tasks in your list: ");
+    public static String printList(ArrayList<Task> list) {
+        System.out.println(list.toString());
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the tasks in your list: \n" );
         for (int i = 1; i <= list.size() && list.get(i - 1) != null; i++) {
-            System.out.println(i + ". " + list.get(i - 1));
+            str.append(i + ". " + list.get(i - 1) + "\n");
         }
+        return str.toString();
     }
 
-    public static void printUndo() {
-        System.out.println("I have undone the previous command");
+    public static String printUndo() {
+        return "I have undone the previous command \n";
     }
 }
