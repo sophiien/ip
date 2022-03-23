@@ -1,5 +1,5 @@
 # User Guide
-User Guide for using **DukeGenie** to keep track of tasks
+User Guide for using **Duke** to keep track of tasks
 
 ## Features 
 1. Add Todo Task
@@ -63,9 +63,9 @@ Expected outcome:
 *eat lunch* task will be added to tasklist
 
 ```
-Added to my brain master:
+Added to list:
 [T][] eat lunch
-Currently I have 1 thing in my brain
+Currently I have 1 thing in list
 ```
 
 ### `deadline` - add deadline task
@@ -80,9 +80,9 @@ Expected outcome:
 *submit report* task will be added to tasklist
 
 ```
-Added to my brain master:
+Added to list:
 [D][] submit report (by 20 FEB 2022 0900)
-Currently I have 1 thing in my brain
+Currently I have 1 thing in list
 ```
 
 ### `event` - add event task
@@ -90,16 +90,16 @@ Currently I have 1 thing in my brain
 
 Example of usage: 
 
-`event party at home /at 3pm`
+`event party at home /at 20/02/2022 0900`
 
 Expected outcome:
 
 *party at home* task will be added to tasklist
 
 ```
-Added to my brain master:
+Added to list:
 [E][] party at home (at 3pm)
-Currently I have 1 thing in my brain
+Currently I have 1 thing in list
 ```
 
 ### `list` - show list of tasks
@@ -130,10 +130,10 @@ Expected outcome:
 *task 1* will be deleted from tasklist
 
 ```
-Yes master. The task 
+The task 
 [D][] submit report (by: 18 Feb 2022 1400)
 has been removed.
-Now you have 2 tasks left master.
+Now you have 2 tasks left in the list.
 ```
 
 ### `mark` - mark task as done
@@ -148,7 +148,6 @@ Expected outcome:
 *task 1* will be marked as done
 
 ```
-You could have gotten me to help you.
 This task has been marked done
 [D][X] submit report (by: 18 Feb 2022 1400)
 ```
@@ -165,7 +164,6 @@ Expected outcome:
 *task 1* will be unmarked as done
 
 ```
-You probably need more genies to help you.
 This task has been marked as not done
 [D][X] submit report (by: 18 Feb 2022 1400)
 
@@ -199,6 +197,6 @@ Expected outcome:
 *task 1* description will be updated to report
 
 ```
-Task number 1 description has been updated to report
+Description old has been updated to report
 
 ```
